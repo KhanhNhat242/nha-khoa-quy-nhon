@@ -14,9 +14,9 @@ import { ServicesCarousel } from './ServicesCarousel'
 /** Dịch vụ được làm thẻ rộng hơn trong carousel (theo brief: Răng sứ & Implant). */
 const featured = new Set<Service['slug']>(['rang-su-tham-my', 'trong-rang-implant'])
 
-/** Kích thước thẻ: cao bằng nhau, thẻ nổi bật rộng hơn. Chiều cao desktop co theo màn hình để vừa vùng ghim. */
+/** Kích thước thẻ: dùng min-height (không cố định) để chữ không bao giờ bị cắt; các thẻ trong dải cao bằng nhau (flex stretch). */
 const slideBase =
-  'group relative isolate flex shrink-0 snap-center flex-col justify-end overflow-hidden rounded-3xl bg-ink text-white h-[26rem] lg:h-[clamp(15rem,calc(100svh-27rem),28rem)]'
+  'group relative isolate flex shrink-0 snap-center flex-col justify-end overflow-hidden rounded-3xl bg-ink text-white min-h-[26rem] lg:min-h-[clamp(15rem,calc(100svh-27rem),28rem)]'
 const slideWidth = { normal: 'w-[min(19rem,80vw)] lg:w-[21rem]', wide: 'w-[min(19rem,80vw)] sm:w-[26rem] lg:w-[30rem]' }
 
 /**
@@ -107,7 +107,7 @@ function ServiceSlide({ service, wide }: { service: Service; wide: boolean }) {
         <h3 className={`font-bold tracking-[-0.01em] ${wide ? 'text-2xl lg:text-[1.75rem]' : 'text-xl lg:text-2xl'}`}>
           {service.name}
         </h3>
-        <p className="mt-2 line-clamp-3 text-[0.9375rem] text-white/90">{service.summary}</p>
+        <p className="mt-2 line-clamp-3 text-[0.9375rem] text-white/90 [@media(max-height:700px)]:line-clamp-2">{service.summary}</p>
 
         <div className="mt-5 flex flex-wrap items-end justify-between gap-x-4 gap-y-2 border-t border-white/20 pt-4">
           {price !== null ? (

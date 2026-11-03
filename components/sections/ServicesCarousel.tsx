@@ -10,9 +10,6 @@ const REDUCED_QUERY = '(prefers-reduced-motion: reduce)'
 const CURVE_DEG = 16
 const CURVE_MAX_DEG = 30
 const CURVE_Z = 46
-/** Làm mờ thẻ phụ: blur tối đa (px), giảm màu tối đa (%) – thẻ chính giữa giữ nguyên màu gốc */
-const SIDE_BLUR = 3
-const SIDE_GRAY = 70
 
 /**
  * Carousel dịch vụ cuộn theo trang (scroll-driven):
@@ -20,10 +17,10 @@ const SIDE_GRAY = 70
  *   sẽ trượt dải thẻ sang ngang để xem các thẻ tiếp theo. Chiều cao section = chiều cao vùng ghim + quãng trượt.
  * - Mobile / giảm chuyển động: dải thẻ là thanh cuộn ngang thường có scroll-snap (vuốt bằng tay, dừng ở giữa thẻ).
  * - Mặt cong như ảnh mẫu (dải thẻ không bị nghiêng): thẻ càng xa tâm càng xoay hướng vào giữa và tiến gần người xem;
- *   thẻ phụ hai bên bị làm mờ + giảm màu, thẻ chính giữa rõ nét và giữ màu gốc. Lề hai đầu = nửa khung − nửa thẻ
- *   để thẻ đầu/cuối cũng nằm được chính giữa. `prefers-reduced-motion`: chỉ giữ làm mờ, không xoay.
+ *   mọi thẻ đều rõ nét, giữ màu gốc (người dùng bỏ làm mờ thẻ phụ 03/11/2026). Lề hai đầu = nửa khung − nửa thẻ
+ *   để thẻ đầu/cuối cũng nằm được chính giữa. `prefers-reduced-motion`: không xoay.
  * - Bàn phím: Tab tới một thẻ đang nằm ngoài khung → cuộn trang tới vị trí đưa thẻ đó về giữa.
- * Chỉ ghi `transform`/`filter`/`opacity` (không re-render React), cập nhật trong rAF.
+ * Chỉ ghi `transform` (không re-render React), cập nhật trong rAF.
  */
 export function ServicesCarousel({ heading, footer, children }: { heading: ReactNode; footer: ReactNode; children: ReactNode }) {
   const outerRef = useRef<HTMLDivElement>(null)
@@ -54,11 +51,6 @@ export function ServicesCarousel({ heading, footer, children }: { heading: React
       for (const slide of slides) {
         const center = trackLeft + slide.offsetLeft - track.offsetLeft - track.scrollLeft + slide.offsetWidth / 2
         const d = (center - viewCenter) / step
-        // Vùng đệm 0.15 thẻ quanh tâm: thẻ chính giữa luôn rõ nét kể cả khi đang cuộn dở
-        const near = Math.min(1, Math.max(0, Math.abs(d) - 0.15) / 0.85)
-        const sharp = near < 0.01
-        slide.style.filter = sharp ? '' : `blur(${(near * SIDE_BLUR).toFixed(2)}px) grayscale(${Math.round(near * SIDE_GRAY)}%)`
-        slide.style.opacity = sharp ? '' : (1 - near * 0.15).toFixed(3)
         if (reduced.matches) {
           slide.style.transform = ''
           continue
@@ -202,7 +194,7 @@ export function ServicesCarousel({ heading, footer, children }: { heading: React
     <div ref={outerRef} className="relative">
       <div
         ref={stickyRef}
-        className="py-14 md:py-20 lg:motion-safe:sticky lg:motion-safe:top-[4.5rem] lg:motion-safe:flex lg:motion-safe:h-[calc(100svh-4.5rem)] lg:motion-safe:flex-col lg:motion-safe:justify-center lg:motion-safe:overflow-x-clip lg:motion-safe:py-8"
+        className="py-14 md:py-20 lg:motion-safe:sticky lg:motion-safe:top-[4.5rem] lg:motion-safe:flex lg:motion-safe:h-[calc(100svh-4.5rem)] lg:motion-safe:flex-col lg:motion-safe:justify-center lg:motion-safe:overflow-x-clip lg:motion-safe:py-[clamp(0.75rem,3.5svh,2rem)]"
       >
         {heading}
 
@@ -210,7 +202,7 @@ export function ServicesCarousel({ heading, footer, children }: { heading: React
         <ul
           ref={trackRef}
           aria-label="Danh sách dịch vụ"
-          className="flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto px-[calc(50%-min(9.5rem,40vw))] data-[dragging=true]:cursor-grabbing data-[dragging=true]:select-none py-6 sm:gap-6 lg:px-[calc(50%-10.5rem)] lg:motion-safe:snap-none lg:motion-safe:overflow-visible lg:motion-safe:py-4"
+          className="flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto px-[calc(50%-min(9.5rem,40vw))] data-[dragging=true]:cursor-grabbing data-[dragging=true]:select-none py-6 sm:gap-6 lg:px-[calc(50%-10.5rem)] lg:motion-safe:snap-none lg:motion-safe:overflow-visible lg:motion-safe:py-4 lg:motion-safe:[@media(max-height:700px)]:py-2"
         >
           {children}
         </ul>
