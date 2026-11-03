@@ -7,7 +7,6 @@ import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { TopBar } from '@/components/layout/TopBar'
 import { AntdProvider } from '@/components/providers/AntdProvider'
-import { RevealObserver } from '@/components/ui/RevealObserver'
 import { getImage } from '@/data/gallery'
 import { site } from '@/data/site'
 import { colors } from '@/lib/tokens'
@@ -30,6 +29,9 @@ export const metadata: Metadata = {
   },
   description: site.shortDescription,
   applicationName: site.name,
+  // Không hiện logo trên tab: biểu tượng SVG trong suốt (khách chưa có logo – R-C1/Q5).
+  // Khai báo thay vì bỏ trống để trình duyệt không hiện icon mặc định và không gọi /favicon.ico (404).
+  icons: { icon: [{ url: 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E', type: 'image/svg+xml' }] },
   // R-G3: bản demo chặn index
   robots: site.isDemo ? { index: false, follow: false } : { index: true, follow: true },
   openGraph: {
@@ -64,7 +66,6 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
               </main>
               <Footer />
               <FloatingContact />
-              <RevealObserver />
             </AntdProvider>
           </AntdRegistry>
         </Suspense>

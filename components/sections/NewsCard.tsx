@@ -36,8 +36,6 @@ export function NewsCard({ post, image, variant = 'compact' }: { post: Post; ima
       </div>
       <div className={`flex min-w-0 flex-1 flex-col ${featured ? 'pt-6' : ''}`}>
         <p className="flex items-center gap-2 text-sm text-muted">
-          <span className="font-semibold tracking-[0.12em] text-accent-dark uppercase">Kiến thức</span>
-          <span aria-hidden="true">·</span>
           <CalendarIcon className="size-4" />
           <time dateTime={post.date}>{formatDate(post.date)}</time>
         </p>

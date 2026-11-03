@@ -22,7 +22,12 @@ export function MobileMenu() {
   useEffect(() => {
     if (!open) return
     const toggle = toggleRef.current
-    const previous = document.body.style.overflow
+    // Khoá cuộn trang phía sau: trang cuộn trên <html> nên phải khoá cả html lẫn body
+    // (mobile thường bỏ qua overflow của riêng body). Không dùng position: fixed để giữ nguyên vị trí cuộn.
+    const html = document.documentElement
+    const previous = { html: html.style.overflow, body: document.body.style.overflow, overscroll: html.style.overscrollBehavior }
+    html.style.overflow = 'hidden'
+    html.style.overscrollBehavior = 'none'
     document.body.style.overflow = 'hidden'
     closeRef.current?.focus()
     const onKey = (event: KeyboardEvent) => {
@@ -30,7 +35,9 @@ export function MobileMenu() {
     }
     window.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = previous
+      html.style.overflow = previous.html
+      html.style.overscrollBehavior = previous.overscroll
+      document.body.style.overflow = previous.body
       window.removeEventListener('keydown', onKey)
       toggle?.focus()
     }
@@ -56,7 +63,7 @@ export function MobileMenu() {
         ? createPortal(
             <>
       <div
-        className={`fixed inset-0 z-50 bg-ink/40 transition-opacity duration-300 ${open ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+        className={`fixed inset-0 z-50 touch-none bg-ink/40 transition-opacity duration-300 ${open ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
         onClick={close}
         aria-hidden="true"
       />
@@ -67,7 +74,9 @@ export function MobileMenu() {
         aria-modal="true"
         aria-label="Menu"
         inert={!open}
-        className={`fixed inset-y-0 right-0 z-50 flex w-[min(22rem,88vw)] flex-col bg-surface shadow-2xl transition-transform duration-300 ease-out ${
+        // Điện thoại (< 640px): phủ kín toàn màn hình, cao đúng 100dvh (không hụt khi thanh địa chỉ ẩn/hiện);
+        // từ sm: ngăn kéo bên phải cao full màn hình
+        className={`fixed top-0 right-0 z-50 flex h-dvh w-full flex-col overscroll-contain bg-surface shadow-2xl transition-transform duration-300 ease-out sm:w-[min(24rem,88vw)] motion-reduce:transition-none ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -84,7 +93,7 @@ export function MobileMenu() {
           </button>
         </div>
 
-        <nav aria-label="Menu di động" className="flex-1 overflow-y-auto px-3 py-4">
+        <nav aria-label="Menu di động" className="flex-1 overflow-y-auto overscroll-contain px-3 py-4">
           <ul className="space-y-1">
             {homeNav.map((item) => (
               <li key={item.href}>
@@ -100,7 +109,7 @@ export function MobileMenu() {
           </ul>
         </nav>
 
-        <div className="space-y-3 border-t border-line p-5">
+        <div className="space-y-3 border-t border-line p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
           <a href={`#${BOOKING_ANCHOR}`} onClick={close} className={`${buttonStyles.primary} w-full`}>
             <CalendarIcon className="size-5" />
             Đặt lịch tư vấn

@@ -117,3 +117,14 @@ export interface NavItem {
   label: string
   href: string
 }
+
+/** Một thẻ trong carousel "Đội ngũ bác sĩ" (cuộn để xem từng ảnh). */
+export interface TeamStory {
+  label: string
+  title: string
+  description: string
+  /** Khoá ảnh trong data/gallery.ts */
+  image: string
+  /** object-position giữ chủ thể nằm trong khung khi ảnh bị cắt (class Tailwind) */
+  position: string
+}

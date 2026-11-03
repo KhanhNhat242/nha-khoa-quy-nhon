@@ -2,7 +2,11 @@
 
 import { useEffect } from 'react'
 
-/** Gắn class `is-revealed` cho phần tử `[data-reveal]` khi cuộn tới (hệ animation có sẵn). */
+/**
+ * Gắn class `is-revealed` cho phần tử `[data-reveal]` khi cuộn tới (hệ animation có sẵn).
+ * PHẢI render bên trong page (cùng boundary với các phần tử data-reveal), không đặt ở layout:
+ * layout hydrate trước page, nếu effect chạy sớm sẽ sửa class của DOM page chưa hydrate → React báo hydration mismatch.
+ */
 export function RevealObserver() {
   useEffect(() => {
     if (!('IntersectionObserver' in window)) {

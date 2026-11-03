@@ -21,8 +21,8 @@ export function BeforeAfter() {
       <SectionHeading
         id="truoc-sau-title"
         eyebrow="Kết quả thực tế"
-        title="Hành Trình Thay Đổi Nụ Cười Thực Tế"
-        description="Chọn dịch vụ rồi kéo thanh trượt để tự so sánh trước và sau điều trị của những khách hàng đã đồng hành cùng phòng khám."
+        title="Ca điều trị thật tại phòng khám, trước và sau"
+        description="Chọn dịch vụ, rồi kéo thanh trượt trên ảnh để tự so sánh tình trạng răng trước và sau khi điều trị."
       />
       <div data-reveal="fade-up">
         <BeforeAfterSlider cases={resolved} tabs={tabs} />

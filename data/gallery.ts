@@ -2,14 +2,24 @@ import type { GalleryImage } from '@/types'
 
 const lib = '/images/library'
 const der = '/images/derived'
+/** Ảnh do người dùng bổ sung trực tiếp vào `public/images/` (03/11/2026). */
+const img = '/images'
 
 /**
  * Danh mục ảnh đã mở xem và kiểm tra nội dung (R-D2).
  * Ảnh trong `derived/` được cắt từ ảnh gốc bằng `scripts/derive-images.mjs`.
  */
 export const gallery = {
-  // TODO(xac-nhan): Q10 – ảnh lộ mặt bệnh nhân trẻ; ngoại lệ do người dùng duyệt 03/11/2026,
-  // phải được khách đồng ý trước khi công khai. Nếu không: đổi hero sang `doiNguTapThe`.
+  // Ảnh hero chính: hai bác sĩ đang điều trị, mặt khách hàng bị che bởi tay bác sĩ và bình hoa.
+  heroDieuTri: {
+    src: `${img}/hero-img.jpg`,
+    alt: 'Hai bác sĩ đeo khẩu trang, mũ trùm đang điều trị răng cho khách hàng tại ghế nha, phía trước là bình hoa hồng',
+    category: 'doi-ngu',
+    privacy: 'covered',
+    width: 1846,
+    height: 2048,
+  },
+  // Không còn dùng ở hero (03/11/2026). Ảnh lộ mặt bệnh nhân trẻ – chỉ dùng lại khi khách đồng ý (Q10).
   heroBacSiThaTim: {
     src: `${lib}/021-2230867027692678.jpg`,
     alt: 'Bác sĩ Nha Khoa Quy Nhơn cùng một bạn trẻ mỉm cười, thả tim sau buổi điều trị',
@@ -306,6 +316,96 @@ export const gallery = {
     privacy: 'none',
     width: 1152,
     height: 2048,
+  },
+  phongDieuTri: {
+    src: `${img}/facility5.jpg`,
+    alt: 'Phòng điều trị có hai ghế nha, đèn chiếu và khay dụng cụ, hai bác sĩ đang điều trị cho khách hàng',
+    category: 'phong-kham',
+    privacy: 'covered',
+    width: 2048,
+    height: 1536,
+  },
+  bacSiThucHanh: {
+    src: `${img}/facility1.jpg`,
+    alt: 'Hai bác sĩ mặc áo choàng vô trùng, đeo khẩu trang, thực hành kỹ thuật trên mô hình với khay dụng cụ',
+    category: 'doi-ngu',
+    privacy: 'none',
+    width: 2048,
+    height: 2024,
+  },
+  maoRangSu: {
+    src: `${img}/facility4.jpg`,
+    alt: 'Bộ mão răng sứ hoàn thiện xếp theo vị trí từng răng trên đế tròn màu đen',
+    category: 'thiet-bi',
+    service: 'rang-su-tham-my',
+    privacy: 'none',
+    width: 2048,
+    height: 1536,
+  },
+  dungCuImplant: {
+    src: `${img}/facility3.jpg`,
+    alt: 'Khay dụng cụ cấy ghép Implant với các mũi khoan xếp theo kích cỡ, đặt trên khăn trải vô trùng',
+    category: 'thiet-bi',
+    service: 'trong-rang-implant',
+    privacy: 'none',
+    width: 1850,
+    height: 2048,
+  },
+  vatTuDieuTri: {
+    src: `${img}/facility2.jpg`,
+    alt: 'Ảnh đen trắng các ống thuốc tê, kim tiêm và kéo phẫu thuật trên khăn trải sau một ca điều trị',
+    category: 'thiet-bi',
+    privacy: 'none',
+    width: 2048,
+    height: 1536,
+  },
+  doiNgu1: {
+    src: `${img}/doctors1.jpg`,
+    alt: 'Đội ngũ bác sĩ, điều dưỡng và nhân viên Nha Khoa Quy Nhơn chụp ảnh tập thể tại sảnh, tay cầm túi quà',
+    category: 'doi-ngu',
+    privacy: 'none',
+    width: 2027,
+    height: 1611,
+  },
+  doiNgu2: {
+    src: `${img}/doctors2.jpg`,
+    alt: 'Tám bác sĩ mặc áo blouse trắng đứng trước quầy lễ tân có biển Quy Nhơn Dental Clinic, ở giữa là một vị khách cầm bó hoa',
+    category: 'doi-ngu',
+    privacy: 'none',
+    width: 2048,
+    height: 1632,
+  },
+  doiNgu3: {
+    src: `${img}/doctors3.jpg`,
+    alt: 'Bảy bác sĩ mặc áo blouse trắng giơ nắm tay cổ vũ trước biển tên phòng khám',
+    category: 'doi-ngu',
+    privacy: 'none',
+    width: 2048,
+    height: 1536,
+  },
+  doiNgu4: {
+    src: `${img}/doctors4.jpg`,
+    alt: 'Đội ngũ phòng khám quây quần trong phòng điều trị, tặng hoa kèm băng rôn cảm ơn thầy',
+    category: 'hoat-dong',
+    privacy: 'none',
+    width: 2048,
+    height: 1278,
+  },
+  doiNgu5: {
+    src: `${img}/doctors5.jpg`,
+    alt: 'Toàn bộ bác sĩ và nhân viên phòng khám giơ ngón cái chụp ảnh tại sảnh',
+    category: 'doi-ngu',
+    privacy: 'none',
+    width: 960,
+    height: 720,
+  },
+  doiNgu6: {
+    src: `${img}/doctors6.jpg`,
+    alt: 'Bác sĩ mặc áo choàng vô trùng thực hành kỹ thuật trên mô hình trong một buổi đào tạo chuyên môn',
+    category: 'hoat-dong',
+    privacy: 'none',
+    width: 2048,
+    height: 1536,
   },
 } satisfies Record<string, GalleryImage>
 

@@ -1,4 +1,4 @@
-import type { BeforeAfterCase, Facility, ProcessStep, ServiceSlug, Usp } from '@/types'
+import type { BeforeAfterCase, Facility, ProcessStep, ServiceSlug, TeamStory, Usp } from '@/types'
 
 /** 4 trụ cột USP theo mục 5 tài liệu yêu cầu – minh hoạ bằng ảnh thật. */
 export const usps: Usp[] = [
@@ -111,17 +111,17 @@ export const cases: BeforeAfterCase[] = [
   },
 ]
 
-/** Lưới bento Cơ sở vật chất – phần tử đầu là ô lớn. */
+/** Lưới bento Cơ sở vật chất – thứ tự khớp với `layout` trong `components/sections/Facilities.tsx`. */
 export const facilities: Facility[] = [
   {
-    image: 'sanhPhongKham',
-    title: 'Sảnh đón tiếp rộng, thoáng',
-    description: 'Không gian sáng, cây xanh và gỗ ấm giúp bạn thư giãn trong lúc chờ khám.',
+    image: 'phongDieuTri',
+    title: 'Phòng điều trị',
+    description: 'Ghế nha có đèn chiếu, bồn súc miệng và khay dụng cụ, bố trí tách biệt để bác sĩ thao tác thuận tiện.',
   },
   {
-    image: 'phongTuVan',
-    title: 'Phòng tư vấn riêng',
-    description: 'Bác sĩ trao đổi trực tiếp, giải thích phác đồ và chi phí trên phim chụp.',
+    image: 'bacSiThucHanh',
+    title: 'Thực hành chuyên môn',
+    description: 'Bác sĩ mặc áo choàng vô trùng, thực hành kỹ thuật trên mô hình cùng dụng cụ chuyên dụng.',
   },
   {
     image: 'ct3dHam',
@@ -132,6 +132,21 @@ export const facilities: Facility[] = [
     image: 'phimSoNghieng',
     title: 'Phim sọ nghiêng',
     description: 'Phân tích khớp cắn, xương hàm để lập kế hoạch niềng răng.',
+  },
+  {
+    image: 'maoRangSu',
+    title: 'Răng sứ hoàn thiện',
+    description: 'Bộ mão sứ được xếp theo vị trí từng răng trên cung hàm trước khi gắn.',
+  },
+  {
+    image: 'dungCuImplant',
+    title: 'Dụng cụ cấy ghép Implant',
+    description: 'Mũi khoan và dụng cụ chuyên dụng sắp theo kích cỡ, chuẩn bị sẵn cho ca cấy ghép.',
+  },
+  {
+    image: 'vatTuDieuTri',
+    title: 'Vật tư sau một ca điều trị',
+    description: 'Ống thuốc tê, kim tiêm và kéo phẫu thuật được dùng trong một ca điều trị.',
   },
 ]
 
@@ -151,5 +166,54 @@ export const processSteps: ProcessStep[] = [
   {
     title: 'Điều trị & Chăm sóc định kỳ',
     description: 'Thực hiện theo phác đồ đã thống nhất, hướng dẫn chăm sóc tại nhà và hẹn tái khám.',
+  },
+]
+
+/**
+ * Carousel "Đội ngũ bác sĩ" – ảnh thật do người dùng cung cấp (`public/images/doctors1–6.jpg`).
+ * Mô tả chỉ nêu điều nhìn thấy trong ảnh: không gắn tên, chức danh, bằng cấp (R-B1, Q6).
+ */
+export const teamStories: TeamStory[] = [
+  {
+    label: 'Đội ngũ',
+    title: 'Một tập thể, một cách chăm sóc',
+    description: 'Bác sĩ, điều dưỡng và nhân viên tiếp đón cùng làm việc tại phòng khám, phối hợp với nhau trong từng ca của bạn.',
+    image: 'doiNgu1',
+    position: 'object-[50%_60%]',
+  },
+  {
+    label: 'Bác sĩ',
+    title: 'Những người trực tiếp khám cho bạn',
+    description: 'Các bác sĩ thăm khám, giải thích trên phim chụp và theo dõi bạn trong suốt quá trình điều trị.',
+    image: 'doiNgu2',
+    position: 'object-[50%_35%]',
+  },
+  {
+    label: 'Tinh thần',
+    title: 'Vui vẻ để bạn bớt lo lắng',
+    description: 'Không khí thân thiện giúp cả người lớn và trẻ nhỏ thấy nhẹ nhàng hơn mỗi lần đến phòng khám.',
+    image: 'doiNgu3',
+    position: 'object-[50%_40%]',
+  },
+  {
+    label: 'Tri ân',
+    title: 'Biết ơn những người thầy',
+    description: 'Đội ngũ cùng nhau tri ân người thầy đã đồng hành trên con đường làm nghề.',
+    image: 'doiNgu4',
+    position: 'object-[50%_50%]',
+  },
+  {
+    label: 'Gắn kết',
+    title: 'Cả phòng khám là một nhà',
+    description: 'Từ lễ tân đến bác sĩ, mọi người cùng chung một mong muốn: bạn được chăm sóc chu đáo trong từng lần đến khám.',
+    image: 'doiNgu5',
+    position: 'object-[50%_55%]',
+  },
+  {
+    label: 'Học hỏi',
+    title: 'Không ngừng trau dồi tay nghề',
+    description: 'Bác sĩ tham gia các buổi thực hành chuyên môn trên mô hình để cập nhật kỹ thuật điều trị.',
+    image: 'doiNgu6',
+    position: 'object-[50%_55%]',
   },
 ]

@@ -21,7 +21,7 @@ export function WhyUs() {
             id="vi-sao-chon-title"
             layout="left"
             eyebrow="Vì sao chọn chúng tôi"
-            title="An Tâm Điều Trị Với 4 Giá Trị Cốt Lõi"
+            title="Bốn điều bạn nhận được khi khám tại đây"
             description="Bốn điều chúng tôi giữ trong mỗi lần thăm khám, để bạn và người thân luôn hiểu rõ, yên tâm trước mọi quyết định điều trị."
             className="lg:mb-8"
           />

@@ -44,7 +44,7 @@ export function PriceTabs({ groups }: Props) {
 
   return (
     <div>
-      <div role="tablist" aria-label="Chọn dịch vụ để xem giá" className="flex flex-wrap gap-1.5 rounded-2xl bg-canvas p-1.5">
+      <div role="tablist" aria-label="Chọn dịch vụ để xem giá" className="flex flex-wrap gap-1.5 self-start rounded-2xl bg-surface p-1.5 sm:inline-flex">
         {groups.map((group, index) => {
           const selected = index === active
           return (
@@ -64,7 +64,7 @@ export function PriceTabs({ groups }: Props) {
               className={`min-h-11 cursor-pointer rounded-xl px-3.5 text-sm font-semibold transition-colors duration-200 sm:px-5 sm:text-[0.9375rem] ${
                 selected
                   ? 'bg-primary text-white'
-                  : 'text-ink hover:bg-surface hover:text-primary'
+                  : 'text-ink hover:bg-primary-light hover:text-primary'
               }`}
             >
               {group.serviceName}
@@ -83,7 +83,7 @@ export function PriceTabs({ groups }: Props) {
           tabIndex={0}
           className="mt-6 focus-visible:outline-offset-4"
         >
-          <table className="w-full border-separate border-spacing-0 text-left md:overflow-hidden md:rounded-2xl md:border md:border-line">
+          <table className="w-full border-separate border-spacing-0 text-left md:overflow-hidden md:rounded-2xl md:border md:border-line md:bg-surface md:shadow-[var(--shadow-soft)]">
             <caption className="sr-only">Bảng giá tham khảo – {group.serviceName}</caption>
             <thead className="hidden md:table-header-group">
               <tr className="bg-primary-light text-sm text-primary-dark">

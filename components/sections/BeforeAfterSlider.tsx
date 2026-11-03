@@ -172,11 +172,11 @@ export function BeforeAfterSlider({ cases, tabs }: Props) {
           {/* Chú thích ca */}
           <dl className="mt-4 grid gap-4 rounded-2xl bg-surface p-5 sm:grid-cols-2 sm:p-6">
             <div>
-              <dt className="text-sm font-semibold tracking-[0.08em] text-muted uppercase">Tình trạng ban đầu</dt>
+              <dt className="text-sm text-muted">Tình trạng ban đầu</dt>
               <dd className="mt-1 text-lg font-semibold text-primary-dark">{active.condition}</dd>
             </div>
             <div className="sm:border-l sm:border-line sm:pl-6">
-              <dt className="text-sm font-semibold tracking-[0.08em] text-muted uppercase">Giải pháp điều trị</dt>
+              <dt className="text-sm text-muted">Giải pháp điều trị</dt>
               <dd className="mt-1 text-lg font-semibold text-accent-dark">{active.solution}</dd>
             </div>
           </dl>

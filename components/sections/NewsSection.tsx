@@ -15,7 +15,7 @@ export function NewsSection() {
       <SectionHeading
         id="tin-tuc-title"
         eyebrow="Kiến thức nha khoa"
-        title="Cẩm Nang Chăm Sóc Răng Miệng"
+        title="Cẩm nang chăm sóc răng miệng"
         description="Những thông tin phổ thông, dễ hiểu giúp bạn chủ động chăm sóc răng miệng cho bản thân và cả gia đình mỗi ngày."
       />
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">

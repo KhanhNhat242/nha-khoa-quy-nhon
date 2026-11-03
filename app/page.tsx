@@ -6,9 +6,10 @@ import { Facilities } from '@/components/sections/Facilities'
 import { Hero } from '@/components/sections/Hero'
 import { NewsSection } from '@/components/sections/NewsSection'
 import { PriceTable } from '@/components/sections/PriceTable'
-import { ProcessTimeline } from '@/components/sections/ProcessTimeline'
+// import { ProcessTimeline } from '@/components/sections/ProcessTimeline' // section đang tắt
 import { ServicesGrid } from '@/components/sections/ServicesGrid'
-import { Testimonials } from '@/components/sections/Testimonials'
+// import { Testimonials } from '@/components/sections/Testimonials' // section đang tắt
+import { RevealObserver } from '@/components/ui/RevealObserver'
 // import { WhyUs } from '@/components/sections/WhyUs' // section đang tắt trong trang
 import { site } from '@/data/site'
 
@@ -49,6 +50,9 @@ export default function HomePage() {
       {/* <Testimonials /> */}
       <BookingSection />
       <NewsSection />
+      {/* Đặt trong trang (không đặt ở layout): effect chỉ chạy sau khi cả trang hydrate xong,
+          nên không gắn class `is-revealed` vào DOM trước React → hết lỗi hydration mismatch */}
+      <RevealObserver />
     </>
   )
 }

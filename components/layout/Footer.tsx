@@ -97,20 +97,15 @@ export function Footer() {
                 {site.address.display} · Chỉ đường
               </a>
             </li>
-            <li className="flex min-h-11 items-center gap-3">
-              <ClockIcon className="size-5 shrink-0 text-accent" />
-              {site.openingHours.display}
-            </li>
           </ul>
         </div>
       </Container>
 
       <div className="relative border-t border-white/10">
-        <Container className="flex flex-col gap-2 py-5 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between">
+        <Container className="flex flex-row gap-2 py-5 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-center">
           <p>
-            © <CopyrightYear /> {site.name}. Bảo lưu mọi quyền.
+            © <CopyrightYear /> {site.name}.
           </p>
-          {site.isDemo ? <p>Bản demo – một số thông tin đang chờ phòng khám xác nhận.</p> : null}
         </Container>
       </div>
     </footer>

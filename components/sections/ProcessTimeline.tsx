@@ -10,7 +10,7 @@ export function ProcessTimeline() {
       <SectionHeading
         id="quy-trinh-title"
         eyebrow="Quy trình"
-        title="Quy Trình Thăm Khám Chuẩn Y Khoa"
+        title="Bốn bước từ lần khám đầu đến tái khám"
         description="Bốn bước rõ ràng giúp bạn biết trước mình sẽ được khám gì, tư vấn ra sao, nhẹ nhàng ngay từ lần đầu đến phòng khám."
       />
 

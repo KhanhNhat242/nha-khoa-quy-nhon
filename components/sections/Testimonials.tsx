@@ -31,7 +31,7 @@ export function Testimonials() {
       <SectionHeading
         id="cam-nhan-title"
         eyebrow="Cảm nhận khách hàng"
-        title="Khách Hàng Nói Gì Về Nha Khoa Quy Nhơn"
+        title="Khách hàng nói gì về Nha Khoa Quy Nhơn"
         description="Đánh giá thật từ những khách hàng đã thăm khám và điều trị, được trích từ Google Maps và Facebook của phòng khám."
       />
 

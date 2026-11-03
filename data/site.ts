@@ -40,3 +40,5 @@ export const homeNav: NavItem[] = [
 ]
 
 export const BOOKING_ANCHOR = 'dat-lich'
+/** id của section hero – header dùng để biết đang ở phạm vi hero (menu dồn trái). */
+export const HERO_ID = 'trang-chu'

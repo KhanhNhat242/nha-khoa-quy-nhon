@@ -39,6 +39,17 @@
     color: var(--color-ink);
     font-size: 1rem;
     line-height: 1.6;
+    /* Không để 1 chữ rớt lẻ ở dòng cuối (đoạn văn, nhãn, chữ trong nút/thẻ) – thuộc tính kế thừa nên áp cho mọi phần tử.
+       Trình duyệt chưa hỗ trợ thì xuống dòng bình thường. */
+    text-wrap: pretty;
+  }
+
+  /* Tiêu đề: chia các dòng dài gần bằng nhau (cũng tránh chữ lẻ cuối) */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
   }
 
   /* Neo section không bị header dính che mất */
@@ -66,6 +77,22 @@
     border: 1px solid var(--color-line);
     background: var(--color-surface);
     box-shadow: var(--shadow-soft);
+  }
+
+  /*
+   * Nền loang của hero – ngoại lệ duy nhất cho quy tắc Flat "không gradient" (mục 6.1, người dùng duyệt 03/11/2026).
+   * Chỉ dùng token màu: vệt xanh ngọc chéo từ góc trên phải vào giữa (giống ảnh mẫu), xanh dương nhạt góc dưới trái,
+   * đáy tan dần sang `canvas` để nối liền section Dịch vụ. Chữ ink/muted trên mọi vùng vẫn ≥ 6:1.
+   */
+  .hero-wash {
+    background:
+      radial-gradient(42% 52% at 84% 16%, color-mix(in oklab, var(--color-accent) 48%, transparent) 0%, transparent 100%),
+      radial-gradient(58% 64% at 62% 54%, var(--color-accent-light) 0%, transparent 100%),
+      radial-gradient(34% 42% at 38% 72%, color-mix(in oklab, var(--color-accent-light) 75%, transparent) 0%, transparent 100%),
+      radial-gradient(45% 55% at 6% 92%, var(--color-primary-light) 0%, transparent 100%),
+      radial-gradient(30% 40% at 18% 8%, color-mix(in oklab, var(--color-primary-light) 80%, transparent) 0%, transparent 100%),
+      linear-gradient(to bottom, transparent 82%, var(--color-canvas) 100%),
+      var(--color-surface);
   }
 
   /* Glassmorphism – chỉ điểm xuyết (header, nút nổi, nhãn trên ảnh). Nền 85% trắng để giữ tương phản chữ */
@@ -197,6 +224,29 @@ body {
   transform-origin: bottom center;
 }
 
+/* Ảnh hero "bồng bềnh trên mặt nước": nhấp nhô lên xuống kèm nghiêng nhẹ qua lại, chu kỳ chậm 7s.
+ * Chỉ dùng transform (không gây reflow); tắt khi prefers-reduced-motion. */
+@keyframes water-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate3d(0, -9px, 0) rotate(-1.2deg);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0) rotate(0.4deg);
+  }
+  75% {
+    transform: translate3d(0, -11px, 0) rotate(1.1deg);
+  }
+}
+
+.water-float {
+  animation: water-float 7s ease-in-out infinite;
+  transform-origin: 50% 60%;
+}
+
 /* Ảnh lớn trong popup bộ sưu tập hiện dần khi chuyển ảnh */
 @keyframes lightbox-fade {
   from {
@@ -212,6 +262,83 @@ body {
 
 .lightbox-fade {
   animation: lightbox-fade 0.3s ease-out;
+}
+
+/* ---------- Rising Ink (components/ui/RisingInk.tsx) ----------
+ * Mỗi từ là một khối có phối cảnh riêng; chữ nghiêng/nổi theo trục X quanh chân chữ.
+ * Transform được ghi bằng JS chỉ khi con trỏ đến gần – lúc nghỉ chữ không có transform. */
+.rising-ink-word {
+  display: inline-block;
+  perspective: 36rem;
+}
+
+.rising-ink-letter {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+
+/* ---------- Luminous Type ----------
+ * Chữ ở trạng thái "mờ" dùng `muted` (7.58:1 – vẫn đạt Accessible & Ethical), vệt sáng trôi chậm làm chữ
+ * chuyển sang xanh `primary` (8.72:1). Vệt sáng tự trôi (không cần con trỏ) nên chạy cả trên điện thoại.
+ * Trình duyệt không hỗ trợ background-clip:text → giữ chữ `muted` bình thường. */
+@property --lum-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+@property --lum-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+.luminous-type {
+  color: var(--color-muted);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .luminous-type {
+    background-image: radial-gradient(
+      circle 8em at var(--lum-x) var(--lum-y),
+      var(--color-primary) 0%,
+      var(--color-primary) 32%,
+      var(--color-muted) 78%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: luminous-drift 12s ease-in-out infinite;
+  }
+
+  .luminous-type::selection {
+    color: var(--color-ink);
+    background-color: var(--color-accent-light);
+  }
+}
+
+@keyframes luminous-drift {
+  0% {
+    --lum-x: -10%;
+    --lum-y: 30%;
+  }
+  25% {
+    --lum-x: 35%;
+    --lum-y: 95%;
+  }
+  50% {
+    --lum-x: 105%;
+    --lum-y: 55%;
+  }
+  75% {
+    --lum-x: 60%;
+    --lum-y: 0%;
+  }
+  100% {
+    --lum-x: -10%;
+    --lum-y: 30%;
+  }
 }
 
 @media (scripting: none) {
@@ -240,8 +367,16 @@ body {
   }
 
   .deco-float,
+  .water-float,
   .lightbox-fade,
   .hero-rise {
     animation: none;
+  }
+
+  /* Luminous Type: bỏ vệt sáng, trả về chữ muted tĩnh */
+  .luminous-type {
+    animation: none;
+    background-image: none;
+    color: var(--color-muted);
   }
 }

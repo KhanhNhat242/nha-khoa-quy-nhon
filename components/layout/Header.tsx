@@ -8,11 +8,19 @@ import { MobileMenu } from './MobileMenu'
 export function Header() {
   return (
     <HeaderShell>
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-1 px-4 sm:px-6 lg:h-[4.5rem] lg:px-8">
+      <div className="relative mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-1 px-4 sm:px-6 lg:h-[4.5rem] lg:px-8">
         <Logo />
 
-        <nav aria-label="Menu chính" className="hidden xl:block">
-          <ul className="flex items-center gap-1">
+        {/*
+          Menu (≥1280px): đặt tuyệt đối trong hàng header.
+          - Trong hero: dồn trái ngay sau logo (left 13rem = lề 2rem + logo ~9.25rem + khoảng cách), dạng viên thuốc có viền.
+          - Ra khỏi hero: trượt về giữa (left 50% + dịch -50%). Chỉ animate `left`/`translate` của riêng phần tử này.
+        */}
+        <nav
+          aria-label="Menu chính"
+          className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-[hero=true]/header:left-52 group-data-[hero=true]/header:translate-x-0 group-data-[ready=true]/header:transition-[left,translate] group-data-[ready=true]/header:duration-700 motion-reduce:!transition-none xl:block"
+        >
+          <ul className="flex items-center gap-1 rounded-full border border-transparent px-1.5 transition-[background-color,border-color] duration-500 group-data-[hero=true]/header:border-line group-data-[hero=true]/header:bg-canvas">
             {homeNav.map((item) => (
               <li key={item.href}>
                 <a
