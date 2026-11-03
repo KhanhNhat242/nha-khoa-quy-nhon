@@ -104,7 +104,7 @@ export function Footer() {
       <div className="relative border-t border-white/10">
         <Container className="flex flex-row gap-2 py-5 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-center">
           <p>
-            © <CopyrightYear /> {site.name}.
+            © <CopyrightYear /> {site.name}
           </p>
         </Container>
       </div>
