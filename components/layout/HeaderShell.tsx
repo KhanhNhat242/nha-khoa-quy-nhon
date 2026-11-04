@@ -48,8 +48,8 @@ export function HeaderShell({ children }: { children: ReactNode }) {
       className={`group/header sticky top-0 z-40 border-b transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500 ${
         inHero
           ? // Trong hero: trong suốt để nền hero (kéo lên nằm dưới header) hiện xuyên qua;
-            // khi đã cuộn trong hero thì thêm kính mờ trắng 55% để chữ/ảnh chạy bên dưới không làm khó đọc menu, hotline.
-            `border-transparent ${scrolled ? 'bg-surface/55 backdrop-blur-xl backdrop-saturate-150' : 'bg-transparent'}`
+            // khi đã cuộn trong hero thì thêm kính mờ trắng 85% để chữ/ảnh chạy bên dưới không làm khó đọc menu, hotline.
+            `border-transparent ${scrolled ? 'bg-surface/85 backdrop-blur-xl backdrop-saturate-150' : 'bg-transparent'}`
           : scrolled
             ? 'border-line bg-surface/80 shadow-[0_8px_24px_-16px_rgb(15_23_42/0.25)] backdrop-blur-xl backdrop-saturate-150'
             : 'border-line/60 bg-surface/95 backdrop-blur-xl backdrop-saturate-150'

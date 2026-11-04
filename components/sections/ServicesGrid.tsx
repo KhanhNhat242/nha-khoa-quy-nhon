@@ -28,7 +28,7 @@ export function ServicesGrid() {
   const reception = getImage('doiNguTiepDon')
 
   return (
-    <section id="dich-vu" aria-labelledby="dich-vu-title" className="bg-canvas">
+    <section id="dich-vu" aria-labelledby="dich-vu-title" className="bg-canvas lg:motion-safe:pt-16">
       <ServicesCarousel
         heading={
           <Container>
