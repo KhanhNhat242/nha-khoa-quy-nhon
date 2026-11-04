@@ -87,7 +87,7 @@ export function TeamStories({ stories, title, bookingHref, nextSectionId }: Prop
         className="sticky top-16 h-[calc(100svh-4rem)] overflow-hidden lg:top-[4.5rem] lg:h-[calc(100svh-4.5rem)]"
       >
         {/* Mobile dọc: [thanh tiến trình | tiêu đề / ảnh / nội dung]. Từ md: [ảnh | thanh tiến trình | tiêu đề + nội dung] */}
-        <div className="mx-auto grid h-full max-w-7xl grid-cols-[auto_minmax(0,1fr)] grid-rows-[auto_minmax(0,1fr)_auto] gap-x-5 gap-y-5 px-4 pt-6 pb-6 sm:gap-x-8 sm:px-6 md:grid-cols-[minmax(0,1.1fr)_auto_minmax(0,1fr)] md:grid-rows-[1fr_auto_auto_1fr] md:gap-x-12 md:gap-y-6 md:pt-8 md:pb-10 lg:gap-x-20 lg:px-8">
+        <div className="mx-auto grid h-full max-w-7xl 2xl:max-w-[88rem] grid-cols-[auto_minmax(0,1fr)] grid-rows-[auto_minmax(0,1fr)_auto] gap-x-5 gap-y-5 px-4 pt-6 pb-6 sm:gap-x-8 sm:px-6 md:grid-cols-[minmax(0,1.6fr)_auto_minmax(0,1fr)] md:grid-rows-[1fr_auto_auto_1fr] md:gap-x-10 md:gap-y-6 md:pt-8 md:pb-10 lg:gap-x-14 lg:px-8">
           {/* Thanh tiến trình: đoạn màu ngọc chạy xuống theo tiến độ cuộn */}
           <div className="col-start-1 row-span-3 row-start-1 flex justify-center md:col-start-2 md:row-span-4">
             <div
@@ -138,7 +138,7 @@ export function TeamStories({ stories, title, bookingHref, nextSectionId }: Prop
                 <div
                   key={story.image}
                   aria-hidden={offset !== 0}
-                  className={`absolute top-1/2 left-1/2 aspect-[4/3] w-[min(92cqw,120cqh)] overflow-hidden rounded-[2rem] bg-primary-light transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none md:w-[min(96cqw,110cqh)] ${state}`}
+                  className={`absolute top-1/2 left-1/2 aspect-[4/3] w-[min(96cqw,124cqh)] overflow-hidden rounded-[2rem] bg-primary-light transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none md:w-[min(100cqw,118cqh)] ${state}`}
                   // Dời bằng thuộc tính translate (áp dụng sau scale nên không bị co theo).
                   // Bước 93% = (100% + 86%) / 2: thẻ bên cạnh thu nhỏ 0.86 vẫn cách thẻ giữa đúng 2rem
                   style={{ translate: `-50% calc(-50% + ${offset} * (93% + 2rem))` }}
@@ -147,7 +147,7 @@ export function TeamStories({ stories, title, bookingHref, nextSectionId }: Prop
                     src={story.photo.src}
                     alt={story.photo.alt}
                     fill
-                    sizes="(min-width: 768px) 560px, 80vw"
+                    sizes="(min-width: 1280px) 760px, (min-width: 768px) 60vw, 92vw"
                     // Thẻ chưa tới lượt nằm ngoài khung nhìn → tải sẵn để cuộn nhanh không thấy khung trống (mỗi ảnh ~60KB)
                     loading="eager"
                     className={`object-cover ${story.position}`}

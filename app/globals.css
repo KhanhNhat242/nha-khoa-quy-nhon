@@ -80,19 +80,58 @@
   }
 
   /*
-   * Nền loang của hero – ngoại lệ duy nhất cho quy tắc Flat "không gradient" (mục 6.1, người dùng duyệt 03/11/2026).
-   * Chỉ dùng token màu: vệt xanh ngọc chéo từ góc trên phải vào giữa (giống ảnh mẫu), xanh dương nhạt góc dưới trái,
-   * đáy tan dần sang `canvas` để nối liền section Dịch vụ. Chữ ink/muted trên mọi vùng vẫn ≥ 6:1.
+   * ReflectiveImage (components/ui/ReflectiveImage.tsx) – ảnh nghiêng 3D + ánh chói như mặt kim loại bóng.
+   * Các lớp sáng chỉ dùng token `surface` pha trong suốt (hiệu ứng ánh sáng tương tác, không phải nền gradient trang trí).
+   * Biến --ri-* do JS ghi; mặc định là trạng thái đứng yên.
    */
-  .hero-wash {
-    background:
-      radial-gradient(42% 52% at 84% 16%, color-mix(in oklab, var(--color-accent) 48%, transparent) 0%, transparent 100%),
-      radial-gradient(58% 64% at 62% 54%, var(--color-accent-light) 0%, transparent 100%),
-      radial-gradient(34% 42% at 38% 72%, color-mix(in oklab, var(--color-accent-light) 75%, transparent) 0%, transparent 100%),
-      radial-gradient(45% 55% at 6% 92%, var(--color-primary-light) 0%, transparent 100%),
-      radial-gradient(30% 40% at 18% 8%, color-mix(in oklab, var(--color-primary-light) 80%, transparent) 0%, transparent 100%),
-      linear-gradient(to bottom, transparent 82%, var(--color-canvas) 100%),
-      var(--color-surface);
+  .reflective-image {
+    perspective: 900px;
+    touch-action: pan-y;
+  }
+
+  .reflective-image__body {
+    transform: rotateX(var(--ri-rx, 0deg)) rotateY(var(--ri-ry, 0deg));
+    isolation: isolate;
+  }
+
+  .reflective-image__shine,
+  .reflective-image__glare,
+  .reflective-image__rim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Vệt sáng chéo trượt theo góc nghiêng */
+  .reflective-image__shine {
+    background: linear-gradient(
+      115deg,
+      transparent calc(var(--ri-sweep, 50%) - 22%),
+      color-mix(in oklab, var(--color-surface) 28%, transparent) var(--ri-sweep, 50%),
+      transparent calc(var(--ri-sweep, 50%) + 22%)
+    );
+    mix-blend-mode: screen;
+    opacity: calc(0.35 + var(--ri-glare, 0) * 0.65);
+  }
+
+  /* Quầng chói chạy theo con trỏ */
+  .reflective-image__glare {
+    background: radial-gradient(
+      circle at var(--ri-gx, 50%) var(--ri-gy, 50%),
+      color-mix(in oklab, var(--color-surface) 42%, transparent) 0%,
+      transparent 50%
+    );
+    mix-blend-mode: screen;
+    opacity: var(--ri-glare, 0);
+  }
+
+  /* Viền sáng mảnh như cạnh thẻ kim loại */
+  .reflective-image__rim {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklab, var(--color-surface) 45%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--color-surface) 75%, transparent);
   }
 
   /* Glassmorphism – chỉ điểm xuyết (header, nút nổi, nhãn trên ảnh). Nền 85% trắng để giữ tương phản chữ */
@@ -224,7 +263,7 @@ body {
   transform-origin: bottom center;
 }
 
-/* Ảnh hero "bồng bềnh trên mặt nước": nhấp nhô lên xuống kèm nghiêng nhẹ qua lại, chu kỳ chậm 7s.
+/* Ảnh hero "bồng bềnh trên mặt nước": nhấp nhô lên xuống kèm nghiêng nhẹ qua lại, nhịp không đều, chu kỳ chậm 7s.
  * Chỉ dùng transform (không gây reflow); tắt khi prefers-reduced-motion. */
 @keyframes water-float {
   0%,
@@ -232,13 +271,13 @@ body {
     transform: translate3d(0, 0, 0) rotate(0deg);
   }
   25% {
-    transform: translate3d(0, -9px, 0) rotate(-1.2deg);
+    transform: translate3d(0, -10px, 0) rotate(-1.2deg);
   }
   50% {
     transform: translate3d(0, -3px, 0) rotate(0.4deg);
   }
   75% {
-    transform: translate3d(0, -11px, 0) rotate(1.1deg);
+    transform: translate3d(0, -12px, 0) rotate(1.1deg);
   }
 }
 

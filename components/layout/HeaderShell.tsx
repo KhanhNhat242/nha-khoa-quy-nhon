@@ -9,7 +9,7 @@ const HERO_EXIT_OFFSET = 160
 /**
  * Header dính – Glassmorphism điểm xuyết: kính mờ sáng, thêm viền + bóng khi đã cuộn.
  * Ghi trạng thái lên `data-*` để phần con đổi kiểu bằng biến thể `group-data-*` của Tailwind:
- * - `data-hero="true"`: đang trong phạm vi hero → header trong suốt (hoà vào nền hero), menu dồn trái dạng viên thuốc.
+ * - `data-hero="true"`: đang trong phạm vi hero → header trong suốt (hoà vào nền hero, mảng ngọc chạm mép trên), menu dồn trái dạng viên thuốc.
  * - `data-ready="true"`: đã đo xong lần đầu → mới bật transition (tránh menu "trượt" khi vừa tải trang).
  */
 export function HeaderShell({ children }: { children: ReactNode }) {
@@ -47,7 +47,7 @@ export function HeaderShell({ children }: { children: ReactNode }) {
       data-ready={ready}
       className={`group/header sticky top-0 z-40 border-b transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500 ${
         inHero
-          ? // Trong hero: trong suốt để nền loang của hero (kéo lên nằm dưới header) hiện xuyên qua;
+          ? // Trong hero: trong suốt để nền hero (kéo lên nằm dưới header) hiện xuyên qua;
             // khi đã cuộn trong hero thì thêm kính mờ trắng 55% để chữ/ảnh chạy bên dưới không làm khó đọc menu, hotline.
             `border-transparent ${scrolled ? 'bg-surface/55 backdrop-blur-xl backdrop-saturate-150' : 'bg-transparent'}`
           : scrolled
